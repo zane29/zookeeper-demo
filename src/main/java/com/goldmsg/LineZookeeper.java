@@ -63,6 +63,7 @@ public class LineZookeeper implements Watcher {
 //        }
     }
 
+    @Override
     public void process(WatchedEvent event) {
         System.out.println(event.getState());
         if (event.getState() == Event.KeeperState.SyncConnected) {
