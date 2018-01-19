@@ -22,18 +22,19 @@ public class CuratorWatch {
 
     public static final String ROOT_PATH = "/root";
 
+    public static final String ZK_HOST = "10.10.20.191:2181";
+
 
     static {
-        String zkhost = "10.10.20.191:2181";
         // 重试机制。baseSleepTimeMs:重试间隔时间基数，maxRetries:是重试次数
         RetryPolicy rp = new ExponentialBackoffRetry(1000, 3);
         CuratorFrameworkFactory.Builder builder = CuratorFrameworkFactory.builder();
-        zkclient = builder.connectString(zkhost)
+        zkclient = builder.connectString(ZK_HOST)
                 .sessionTimeoutMs(5000)
                 .connectionTimeoutMs(5000)
                 .canBeReadOnly(false)
                 .retryPolicy(rp)
-                .defaultData("".getBytes())
+                .defaultData("testdata".getBytes())
                 .build();
         zkclient.start();
 
